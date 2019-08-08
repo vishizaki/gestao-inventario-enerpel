@@ -10,10 +10,48 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_07_134050) do
+ActiveRecord::Schema.define(version: 2019_08_08_141221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "final_products", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "inventories", force: :cascade do |t|
+    t.integer "quantity"
+    t.bigint "raw_material_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["raw_material_id"], name: "index_inventories_on_raw_material_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.integer "quantity"
+    t.bigint "final_product_id"
+    t.bigint "raw_material_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["final_product_id"], name: "index_products_on_final_product_id"
+    t.index ["raw_material_id"], name: "index_products_on_raw_material_id"
+  end
+
+  create_table "raw_materials", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "record_logs", force: :cascade do |t|
+    t.string "title"
+    t.string "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,4 +65,7 @@ ActiveRecord::Schema.define(version: 2019_08_07_134050) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "inventories", "raw_materials"
+  add_foreign_key "products", "final_products"
+  add_foreign_key "products", "raw_materials"
 end
