@@ -28,22 +28,15 @@ class PagesController < ApplicationController
 
   def sell_opgw_box
     materials_array = FinalProduct.first.products
+    product_bm_hash = get_final_product_bm_hash(materials_array)
+    inventory_quantity_hash = get_inventory_quantity_hash(materials_array)
 
-    materials_array.each do |material|
-      inventory_materials = material.raw_material.inventories
-      
-      inventory_materials.each do |inventory_material|
-        inventory_material.sell_inventory(inventory_material, inventory_material.quantity)
-        raise
-
-        if inventory_material.save
-          RecordLog.create(title: "Venda de 1 quantidade de #{materials_array.name}", date: Time.now.strftime("%d/%m/%Y %H:%M"))
-        else
-          flash[:alert] = "Você não pode baixar a caixa OPGW pois não há estoque suficiente"
-          redirect_to root_path
-        end
+    materials_array.each do |product|
+      product.raw_material.inventories.each do |inventory_material|
+        record_final_product_sale(inventory_material, product_bm_hash, inventory_quantity_hash)
       end
     end
+
     redirect_to root_path
   end
 
@@ -52,4 +45,41 @@ class PagesController < ApplicationController
   def find_material
     @inventory_material = Inventory.find(params[:material])
   end
+
+  def get_final_product_bm_hash(final_product_array)
+    product_bm_hash = {}
+    final_product_array.each do |material|
+      product_bm_hash[material.raw_material.name] = material.quantity
+    end
+
+    return product_bm_hash
+  end
+
+  def get_inventory_quantity_hash(final_product_array)
+    inventory_hash = {}
+    final_product_array.each do |material|
+      inventories_material = material.raw_material.inventories
+      inventories_material.each do |inventory_material|
+        inventory_hash[inventory_material.raw_material.name] = inventory_material.quantity
+      end
+    end
+
+    return inventory_hash
+  end
+
+  def validate_quantity(bm_hash, inventory_hash)
+    results_array = []
+    bm_hash.each {|key, value| results_array << (inventory_hash[key] >= value ) }
+
+    return results_array.include? false
+  end
+  
+  def record_final_product_sale(inventory_material, product_bm_hash, inventory_quantity_hash)
+    if validate_quantity(product_bm_hash, inventory_quantity_hash) == false
+      inventory_material.sell_inventory(inventory_material, product_bm_hash[inventory_material.raw_material.name])
+      inventory_material.save
+      RecordLog.create(title: "Venda de 1 quantidade de Caixa OPGW", date: Time.now.strftime("%d/%m/%Y %H:%M"))
+    end
+  end
+
 end
