@@ -2,7 +2,6 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:home]
   before_action :find_material, only: [:add_quantity, :subtract_quantity]
 
-
   def home
     @inventories = Inventory.all.sort_by { |material| material.raw_material.name }
   end
@@ -26,8 +25,9 @@ class PagesController < ApplicationController
     end
   end
 
-  def sell_opgw_box
-    materials_array = FinalProduct.first.products
+  def sell_product
+    final_product = FinalProduct.find_by_name(params[:product_to_sell])
+    materials_array = final_product.products
     product_bm_hash = get_final_product_bm_hash(materials_array)
     inventory_quantity_hash = get_inventory_quantity_hash(materials_array)
 
@@ -36,7 +36,6 @@ class PagesController < ApplicationController
         record_final_product_sale(inventory_material, product_bm_hash, inventory_quantity_hash)
       end
     end
-
     redirect_to root_path
   end
 
@@ -69,8 +68,14 @@ class PagesController < ApplicationController
 
   def validate_quantity(bm_hash, inventory_hash)
     results_array = []
-    bm_hash.each {|key, value| results_array << (inventory_hash[key] >= value ) }
-
+    results_array_inv = []
+    results_array_bm = []
+    bm_hash.each { |key, value| 
+      results_array << (inventory_hash[key] >= value)
+      results_array_inv << inventory_hash[key]
+      results_array_bm << value
+    }
+    
     return results_array.include? false
   end
   

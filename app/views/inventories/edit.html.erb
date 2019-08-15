@@ -1,0 +1,9 @@
+<h2>Produto: <%= @inventory.raw_material.name %></h2>
+
+<%= simple_form_for(@inventory) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :quantity, required: false, label: 'Quantidade' %>
+  <div class="form-actions ">
+    <%= f.button :submit, 'Mudar quantidade', class: "btn btn-success", id: "" %>
+  </div>
+<% end %>

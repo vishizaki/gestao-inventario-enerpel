@@ -1,7 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Controle de Estoque</h1>
-
+<br>
+<%= link_to 'Registrar venda Caixa OPGW', sell_product_path(product_to_sell: "Caixa OPGW"), method: :patch %>
+<br><br>
 <table class="index-table">
   <thead>
     <tr>
@@ -25,7 +27,7 @@
             <i class="fas fa-arrow-down text-danger"></i>
           <% end %>
         </td>
-
+        <td><%= link_to "Adicionar vários itens", edit_inventory_path(material.id) %></td>
       </tr>
     <% end %>
   </tbody>
@@ -34,5 +36,3 @@
 <br>
 
 <%#= link_to 'New Raw Material', new_raw_material_path %>
-<br><br>
-<%= link_to 'Registrar venda Caixa OPGW', sell_opgw_box_path, method: :patch %>
