@@ -75,7 +75,6 @@ class PagesController < ApplicationController
       results_array_inv << inventory_hash[key]
       results_array_bm << value
     }
-    
     return results_array.include? false
   end
   
