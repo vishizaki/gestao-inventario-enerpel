@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   # resources :raw_materials
   resources :inventories, only: [:edit, :update]
+  resources :record_logs, only: [:index]
   resources :raw_materials
   # root to: "raw_materials#index"
   patch 'add', to: 'pages#add_quantity', as: :add_quantity

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_08_141221) do
+ActiveRecord::Schema.define(version: 2019_08_19_213422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2019_08_08_141221) do
     t.bigint "raw_material_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
     t.index ["raw_material_id"], name: "index_inventories_on_raw_material_id"
   end
 

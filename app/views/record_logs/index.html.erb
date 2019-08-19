@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Controle de Registros</h1>
+  <% @record_logs.each do |record| %>
+    <h3><%= record.date %> <%= record.title %></h3>
+  <% end %>
+
+<h1>Teste produtos</h1>
+  <% @final_products.each do |product| %>
+    <h3><%= product.name %></h3>
+  <% end %>
