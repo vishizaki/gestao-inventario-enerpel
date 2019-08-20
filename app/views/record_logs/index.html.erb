@@ -1,11 +1,22 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Controle de Registros</h1>
-  <% @record_logs.each do |record| %>
-    <h3><%= record.date %> <%= record.title %></h3>
-  <% end %>
-
-<h1>Teste produtos</h1>
-  <% @final_products.each do |product| %>
-    <h3><%= product.name %></h3>
-  <% end %>
+<div class="header-estoque">Controle de Registros</div>
+<div class="container">
+  <%= link_to 'Retornar ao Controle de Estoque', pages_path, class:"btn btn-enerpel ml-4 mt-4 mb-4" %>
+  <p id="notice"><%= notice %></p>
+  
+  <table class="index-table">
+    <thead>
+      <tr class="table-header pl-4">
+        <th class="pl-4">Data e hora</th>
+        <th class="text-left">Descrição do registro</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @record_logs.each do |record| %>
+      <tr>
+        <td class="pl-4"><%= record.date %></td>
+        <td><%= record.title %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

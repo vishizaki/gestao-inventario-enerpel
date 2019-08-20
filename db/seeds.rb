@@ -13,7 +13,7 @@ def create_product(product_hash, final_product)
     else
       material = RawMaterial.create!(name: product_name)
       unless Inventory.find_by(name: product_name)
-        inventory = Inventory.new(name: material.name, quantity: 100)
+        inventory = Inventory.new(name: material.name, quantity: 1000)
         inventory.raw_material = material
         inventory.save
       end

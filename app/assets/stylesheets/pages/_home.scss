@@ -1,1 +1,35 @@
 // Specific CSS for your home-page
+.sell-links {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.index-table {
+  width: 100%;
+}
+
+.container {
+  background-color: #fbfbfb;
+  padding: 0 !important;
+}
+
+tr:nth-child(even) {background: #EEE}
+tr:nth-child(odd) {background: #fbfbfb}
+
+.header-estoque {
+  background-color: $enerpel-green;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  height: 90px;
+  text-align: center;
+  font-size: 2rem;
+  color: white;
+  width: 100%;
+}
+
+.table-header {
+  background-color: #EEE!important;
+  height: 50px;
+}

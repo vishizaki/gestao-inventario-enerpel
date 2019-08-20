@@ -1,38 +1,40 @@
-<p id="notice"><%= notice %></p>
+<div class="header-estoque">Controle de Estoque</div>
+<div class="container">
+    <p id="notice"><%= notice %></p>
 
-<h1>Controle de Estoque</h1>
-<br>
-<%= link_to 'Registrar venda Caixa OPGW', sell_product_path(product_to_sell: "Caixa OPGW"), method: :patch %>
-<br><br>
-<table class="index-table">
-  <thead>
-    <tr>
-      <th class="pr-5">Material</th>
-      <th>Quantidade</th>
-      <th></th>
-    </tr>
-  </thead>
+  <button type="button" class="btn btn-enerpel ml-4 mt-4 mb-4" data-toggle="modal" data-target="#modalExemplo">
+    Registrar Venda de Produto
+  </button>
+  <%= render 'modal_create' %>
 
-  <tbody style="background-color: white">
-    <% @inventories.each do |material| %>
-      <tr>
-        <td><%= material.raw_material.name %></td>
-        <td class="text-right"><%= material.quantity %></td>
-        
-        <td class="d-flex flex-column text-center pl-2">
-          <%= link_to add_quantity_path(material: material.id), method: :patch do %>
-            <i class="fas fa-arrow-up text-success"></i>
-          <% end %>
-          <%= link_to subtract_quantity_path(material: material.id), method: :patch do %>
-            <i class="fas fa-arrow-down text-danger"></i>
-          <% end %>
-        </td>
-        <td><%= link_to "Adicionar vários itens", edit_inventory_path(material.id) %></td>
+  <table class="index-table">
+    <thead>
+      <tr class="table-header pl-4">
+        <th class="pr-5 pl-4">Material</th>
+        <th class="text-right">Quantidade</th>
+        <th></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
-
-<%= link_to 'Abrir registro de movimentação', record_logs_path %>
+    <tbody>
+      <% @inventories.each do |material| %>
+        <tr>
+          <td class="pl-4"><%= material.raw_material.name %></td>
+          <td class="text-right"><%= material.quantity %></td>
+          
+          <td class="d-flex flex-column text-center pl-2">
+            <%= link_to add_quantity_path(material: material.id), method: :patch do %>
+              <i class="fas fa-arrow-up text-success"></i>
+            <% end %>
+            <%= link_to subtract_quantity_path(material: material.id), method: :patch do %>
+              <i class="fas fa-arrow-down text-danger"></i>
+            <% end %>
+          </td>
+          <td class="text-center"><%= link_to "Editar quantidade", edit_inventory_path(material.id), class:"btn btn-enerpel" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= render 'shared/footer' %>

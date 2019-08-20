@@ -1,0 +1,31 @@
+<div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-size" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Lista de Itens a Venda</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="sell-links">
+          <%= link_to 'Registrar venda Caixa OPGW - Torre', sell_product_path(product_to_sell: "Caixa OPGW - Torre"), method: :patch %>
+          <%= link_to 'Registrar venda Caixa OPGW - Pórtico', sell_product_path(product_to_sell: "Caixa OPGW - Pórtico"), method: :patch %>
+          <%= link_to 'Registrar venda Cruzeta com Suporte - Torre', sell_product_path(product_to_sell: "Cruzeta com Suporte - Torre"), method: :patch %>
+          <%= link_to 'Registrar venda Cruzeta com Suporte - Pórtico', sell_product_path(product_to_sell: "Cruzeta com Suporte - Pórtico"), method: :patch %>
+          <%= link_to 'Registrar venda Grampo Guia de Descida em Torre - (9:00 a 11:99)', sell_product_path(product_to_sell: "Grampo Guia de Descida em Torre - (9:00 a 11:99)"), method: :patch %>
+          <%= link_to 'Registrar venda Grampo Guia de Descida em Torre - (12:00 a 13:99)', sell_product_path(product_to_sell: "Grampo Guia de Descida em Torre - (12:00 a 13:99)"), method: :patch %>
+          <%= link_to 'Registrar venda Grampo Guia de Descida em Torre - (14:00 a 15:99)', sell_product_path(product_to_sell: "Grampo Guia de Descida em Torre - (14:00 a 15:99)"), method: :patch %>
+          <%= link_to 'Registrar venda Grampo Guia de Descida em Torre - (16:00 a 17:99)', sell_product_path(product_to_sell: "Grampo Guia de Descida em Torre - (16:00 a 17:99)"), method: :patch %>
+          <%= link_to 'Registrar venda Grampo Guia de Descida em Pórtico - (9:00 a 11:99)', sell_product_path(product_to_sell: "Grampo Guia de Descida em Pórtico - (9:00 a 11:99)"), method: :patch %>
+          <%= link_to 'Registrar venda Grampo Guia de Descida em Pórtico - (12:00 a 13:99)', sell_product_path(product_to_sell: "Grampo Guia de Descida em Pórtico - (12:00 a 13:99)"), method: :patch %>
+          <%= link_to 'Registrar venda Grampo Guia de Descida em Pórtico - (14:00 a 15:99)', sell_product_path(product_to_sell: "Grampo Guia de Descida em Pórtico - (14:00 a 15:99)"), method: :patch %>
+          <%= link_to 'Registrar venda Grampo Guia de Descida em Pórtico - (16:00 a 17:99)', sell_product_path(product_to_sell: "Grampo Guia de Descida em Pórtico - (16:00 a 17:99)"), method: :patch %>
+        </div>  
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-enerpel" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
