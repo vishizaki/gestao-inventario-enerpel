@@ -30,10 +30,11 @@ class PagesController < ApplicationController
     materials_array = final_product.products
     product_bm_hash = get_final_product_bm_hash(materials_array)
     inventory_quantity_hash = get_inventory_quantity_hash(materials_array)
+    record_log = RecordLog.new(title: "Venda de 1 quantidade de #{final_product.name}", date: Time.now.strftime("%d/%m/%Y %H:%M"))
 
     materials_array.each do |product|
       product.raw_material.inventories.each do |inventory_material|
-        record_final_product_sale(inventory_material, product_bm_hash, inventory_quantity_hash, final_product)
+        record_final_product_sale(inventory_material, product_bm_hash, inventory_quantity_hash, final_product, record_log)
       end
     end
     redirect_to root_path
@@ -78,11 +79,11 @@ class PagesController < ApplicationController
     return results_array.include? false
   end
 
-  def record_final_product_sale(inventory_material, product_bm_hash, inventory_quantity_hash, product_name)
+  def record_final_product_sale(inventory_material, product_bm_hash, inventory_quantity_hash, product_name, record_log)
     if validate_quantity(product_bm_hash, inventory_quantity_hash) == false
       inventory_material.sell_inventory(inventory_material, product_bm_hash[inventory_material.raw_material.name])
       inventory_material.save
-      RecordLog.create(title: "Venda de 1 quantidade de #{product_name.name}", date: Time.now.strftime("%d/%m/%Y %H:%M"))
+      record_log.save
     else
       flash[:alert] = "Você não pode baixar o material #{product_name.name} pois não há estoque suficiente"
     end
