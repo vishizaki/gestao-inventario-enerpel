@@ -1,5 +1,8 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:home]
+  # skip_before_action :authenticate_user!, only: [:home]
+  # before_action :authorize_admin
+  # before_action :authenticate_user!
+
   before_action :find_material, only: [:add_quantity, :subtract_quantity]
 
   def home

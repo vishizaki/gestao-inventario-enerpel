@@ -33,3 +33,10 @@ tr:nth-child(odd) {background: #fbfbfb}
   background-color: #EEE!important;
   height: 50px;
 }
+
+.not-logged-in-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 80.7px - 90px - 120px);
+}

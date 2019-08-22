@@ -1,22 +1,33 @@
-<div class="header-estoque">Controle de Registros</div>
-<div class="container mb-5">
-  <p id="notice"><%= notice %></p>
-  <%= link_to 'Retornar ao Controle de Estoque', root_path, class:"btn btn-enerpel ml-4 mt-4 mb-4" %>
+<% if current_user.admin? %>
+  <div class="header-estoque">Controle de Registros <%= @record_text %></div>
+  <div class="container mb-5">
+    <p id="notice"><%= notice %></p>
+    <%= link_to 'Retornar ao Controle de Estoque', root_path, class:"btn btn-secondary ml-4 mt-4 mb-4" %>
+    <%= link_to 'Mostrar todos os registros', record_logs_path(:display => "display_all"), class:"btn btn-enerpel ml-4 mt-4 mb-4" %>
   
-  <table class="index-table">
-    <thead>
-      <tr class="table-header pl-4">
-        <th class="pl-4">Data e hora</th>
-        <th class="text-left">Descrição do registro</th>
-      </tr>
-    </thead>
-    <tbody>
-    <% @record_logs.each do |record| %>
-      <tr>
-        <td class="pl-4"><%= record.date %></td>
-        <td><%= record.title %></td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
-</div>
+  <form class="form-inline ml-4 mb-4">
+      <input class="form-control form-width" name="query" type="search" placeholder="Digite a quantidade de registros a ser mostrada" aria-label="Search" value="">
+      <button class="btn btn-enerpel" type="submit">Search</button>
+    </form>
+    
+    <table class="index-table">
+      <thead>
+        <tr class="table-header pl-4">
+          <th class="pl-4">Data e hora</th>
+          <th class="text-left">Descrição do registro</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @record_logs.each do |record| %>
+        <tr>
+          <td class="pl-4"><%= record.date %></td>
+          <td><%= record.title %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <%= render 'pages/log_as_admin' %>
+<% end %>
+<%= render 'shared/footer' %>

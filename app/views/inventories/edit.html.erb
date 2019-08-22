@@ -1,9 +1,13 @@
-<h2>Produto: <%= @inventory.raw_material.name %></h2>
-
-<%= simple_form_for(@inventory) do |f| %>
-  <%= f.error_notification %>
-  <%= f.input :quantity, required: false, label: 'Quantidade' %>
-  <div class="form-actions ">
-    <%= f.button :submit, 'Mudar quantidade', class: "btn btn-success", id: "" %>
+<div class="header-estoque">Produto: <%= @inventory.raw_material.name %></div>
+<div class="container edit-container">
+  <div class="p-4">
+    <%= simple_form_for(@inventory) do |f| %>
+      <%= f.error_notification %>
+      <%= f.input :quantity, required: false, label: 'Quantidade' %>
+      <div class="form-actions">
+        <%= link_to "Retornar à página principal", root_path, class: "btn btn-secondary" %>
+        <%= f.button :submit, 'Mudar quantidade', class: "btn btn-enerpel", data: { confirm: "Tem certeza que deseja alterar a quantidade do material: #{@inventory.raw_material.name}?" } %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
