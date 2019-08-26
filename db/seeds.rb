@@ -1,15 +1,20 @@
 puts "Deleting Product, Inventory, Raw Material and logs"
-# case Rails.env
-# when "development"
-#    ...
-# when "production"
-#    ...
-# end
-Product.delete_all
-Inventory.delete_all #deletar depois
-FinalProduct.delete_all
-RawMaterial.delete_all
-RecordLog.delete_all #deletar depois
+
+case Rails.env
+when "development"
+  puts "cleaning DB for development"
+  Product.delete_all
+  Inventory.delete_all #deletar depois
+  FinalProduct.delete_all
+  RawMaterial.delete_all
+  RecordLog.delete_all #deletar depois
+when "production"
+  Product.delete_all
+  Inventory.delete_all #deletar depois
+  FinalProduct.delete_all
+  RawMaterial.delete_all
+  RecordLog.delete_all #deletar depois
+end
 
 def create_product(product_hash, final_product)
   
