@@ -9,18 +9,66 @@
       </div>
       <div class="modal-body">
         <div class="sell-links">
-          <%= button_to "Registrar venda Caixa OPGW - Torre", sell_product_path(product_to_sell: "Caixa OPGW - Torre"), :class => "btn btn-enerpel mb-1", method: :patch, data: { confirm: "Tem certeza que deseja registrar a venda de 1 Caixa OPGW - Torre?" } %>
-          <%= button_to "Registrar venda Caixa OPGW - Pórtico", sell_product_path(product_to_sell: "Caixa OPGW - Pórtico"), :class => "btn btn-enerpel mb-1", method: :patch, data: { confirm: "Tem certeza que deseja registrar a venda de 1 Caixa OPGW - Pórtico?" } %>
-          <%= button_to "Registrar venda Cruzeta com Suporte - Torre", sell_product_path(product_to_sell: "Cruzeta com Suporte - Torre"), :class => "btn btn-enerpel mb-1", method: :patch, data: { confirm: "Tem certeza que deseja registrar a venda de 1 Cruzeta com Suporte - Torre?" } %>
-          <%= button_to "Registrar venda Cruzeta com Suporte - Pórtico", sell_product_path(product_to_sell: "Cruzeta com Suporte - Pórtico"), :class => "btn btn-enerpel mb-1", method: :patch, data: { confirm: "Tem certeza que deseja registrar a venda de 1 Cruzeta com Suporte - Pórtico?" } %>
-          <%= button_to "Registrar venda Grampo Guia de Descida em Torre - (9:00 a 11:99)", sell_product_path(product_to_sell: "Grampo Guia de Descida em Torre - (9:00 a 11:99)"), :class => "btn btn-enerpel mb-1", method: :patch, data: { confirm: "Tem certeza que deseja registrar a venda de 1 Grampo Guia de Descida em Torre - (9:00 a 11:99)?" } %>
-          <%= button_to "Registrar venda Grampo Guia de Descida em Torre - (12:00 a 13:99)", sell_product_path(product_to_sell: "Grampo Guia de Descida em Torre - (12:00 a 13:99)"), :class => "btn btn-enerpel mb-1", method: :patch, data: { confirm: "Tem certeza que deseja registrar a venda de 1 Grampo Guia de Descida em Torre - (12:00 a 13:99)?" } %>
-          <%= button_to "Registrar venda Grampo Guia de Descida em Torre - (14:00 a 15:99)", sell_product_path(product_to_sell: "Grampo Guia de Descida em Torre - (14:00 a 15:99)"), :class => "btn btn-enerpel mb-1", method: :patch, data: { confirm: "Tem certeza que deseja registrar a venda de 1 Grampo Guia de Descida em Torre - (14:00 a 15:99)?" } %>
-          <%= button_to "Registrar venda Grampo Guia de Descida em Torre - (16:00 a 17:99)", sell_product_path(product_to_sell: "Grampo Guia de Descida em Torre - (16:00 a 17:99)"), :class => "btn btn-enerpel mb-1", method: :patch, data: { confirm: "Tem certeza que deseja registrar a venda de 1 Grampo Guia de Descida em Torre - (16:00 a 17:99)?" } %>
-          <%= button_to "Registrar venda Grampo Guia de Descida em Pórtico - (9:00 a 11:99)", sell_product_path(product_to_sell: "Grampo Guia de Descida em Pórtico - (9:00 a 11:99)"), :class => "btn btn-enerpel mb-1", method: :patch, data: { confirm: "Tem certeza que deseja registrar a venda de 1 Grampo Guia de Descida em Pórtico - (9:00 a 11:99)?" } %>
-          <%= button_to "Registrar venda Grampo Guia de Descida em Pórtico - (12:00 a 13:99)", sell_product_path(product_to_sell: "Grampo Guia de Descida em Pórtico - (12:00 a 13:99)"), :class => "btn btn-enerpel mb-1", method: :patch, data: { confirm: "Tem certeza que deseja registrar a venda de 1 Grampo Guia de Descida em Pórtico - (12:00 a 13:99)?" } %>
-          <%= button_to "Registrar venda Grampo Guia de Descida em Pórtico - (14:00 a 15:99)", sell_product_path(product_to_sell: "Grampo Guia de Descida em Pórtico - (14:00 a 15:99)"), :class => "btn btn-enerpel mb-1", method: :patch, data: { confirm: "Tem certeza que deseja registrar a venda de 1 Grampo Guia de Descida em Pórtico - (14:00 a 15:99)?" } %>
-          <%= button_to "Registrar venda Grampo Guia de Descida em Pórtico - (16:00 a 17:99)", sell_product_path(product_to_sell: "Grampo Guia de Descida em Pórtico - (16:00 a 17:99)"), :class => "btn btn-enerpel", method: :patch, data: { confirm: "Tem certeza que deseja registrar a venda de 1 Grampo Guia de Descida em Pórtico - (16:00 a 17:99)?" } %>
+          <%= form_for @inventory, url: sell_product_path(product_to_sell: "Caixa OPGW - Torre"), method: :patch, html: { class: "d-flex align-items-center mb-1" } do |f| %>
+            <%= number_field_tag :quantity, nil, class: "w-25 modal-input", placeholder:"Digite a quantidade" %>
+            <%= f.submit "Registrar venda Caixa OPGW - Torre", class: "btn btn-enerpel w-75", data: { confirm: "Tem certeza que deseja registrar a venda de: Caixa OPGW - Torre?" } %>
+          <% end %>
+
+          <%= form_for @inventory, url: sell_product_path(product_to_sell: "Caixa OPGW - Pórtico"), method: :patch, html: { class: "d-flex align-items-center mb-1" } do |f| %>
+            <%= number_field_tag :quantity, nil, class: "w-25 modal-input", placeholder:"Digite a quantidade" %>
+            <%= f.submit "Registrar venda Caixa OPGW - Pórtico", class: "btn btn-enerpel w-75", data: { confirm: "Tem certeza que deseja registrar a venda de: Caixa OPGW - Pórtico?" } %>
+          <% end %>
+
+          <%= form_for @inventory, url: sell_product_path(product_to_sell: "Cruzeta com Suporte - Torre"), method: :patch, html: { class: "d-flex align-items-center mb-1" } do |f| %>
+            <%= number_field_tag :quantity, nil, class: "w-25 modal-input", placeholder:"Digite a quantidade" %>
+            <%= f.submit "Registrar venda Cruzeta com Suporte - Torre", class: "btn btn-enerpel w-75", data: { confirm: "Tem certeza que deseja registrar a venda de: Cruzeta com Suporte - Torre?" } %>
+          <% end %>
+
+          <%= form_for @inventory, url: sell_product_path(product_to_sell: "Cruzeta com Suporte - Pórtico"), method: :patch, html: { class: "d-flex align-items-center mb-1" } do |f| %>
+            <%= number_field_tag :quantity, nil, class: "w-25 modal-input", placeholder:"Digite a quantidade" %>
+            <%= f.submit "Registrar venda Cruzeta com Suporte - Pórtico", class: "btn btn-enerpel w-75", data: { confirm: "Tem certeza que deseja registrar a venda de: Cruzeta com Suporte - Pórtico?" } %>
+          <% end %>
+
+          <%= form_for @inventory, url: sell_product_path(product_to_sell: "Grampo Guia de Descida em Torre - (9:00 a 11:99)"), method: :patch, html: { class: "d-flex align-items-center mb-1" } do |f| %>
+            <%= number_field_tag :quantity, nil, class: "w-25 modal-input", placeholder:"Digite a quantidade" %>
+            <%= f.submit "Registrar venda Grampo Guia de Descida em Torre - (9:00 a 11:99)", class: "btn btn-enerpel w-75", data: { confirm: "Tem certeza que deseja registrar a venda de: Grampo Guia de Descida em Torre - (9:00 a 11:99)?" } %>
+          <% end %>
+
+          <%= form_for @inventory, url: sell_product_path(product_to_sell: "Grampo Guia de Descida em Torre - (12:00 a 13:99)"), method: :patch, html: { class: "d-flex align-items-center mb-1" } do |f| %>
+            <%= number_field_tag :quantity, nil, class: "w-25 modal-input", placeholder:"Digite a quantidade" %>
+            <%= f.submit "Registrar venda Grampo Guia de Descida em Torre - (12:00 a 13:99)", class: "btn btn-enerpel w-75", data: { confirm: "Tem certeza que deseja registrar a venda de: Grampo Guia de Descida em Torre - (12:00 a 13:99)?" } %>
+          <% end %>
+
+          <%= form_for @inventory, url: sell_product_path(product_to_sell: "Grampo Guia de Descida em Torre - (14:00 a 15:99)"), method: :patch, html: { class: "d-flex align-items-center mb-1" } do |f| %>
+            <%= number_field_tag :quantity, nil, class: "w-25 modal-input", placeholder:"Digite a quantidade" %>
+            <%= f.submit "Registrar venda Grampo Guia de Descida em Torre - (14:00 a 15:99)", class: "btn btn-enerpel w-75", data: { confirm: "Tem certeza que deseja registrar a venda de: Grampo Guia de Descida em Torre - (14:00 a 15:99)?" } %>
+          <% end %>
+
+          <%= form_for @inventory, url: sell_product_path(product_to_sell: "Grampo Guia de Descida em Torre - (16:00 a 17:99)"), method: :patch, html: { class: "d-flex align-items-center mb-1" } do |f| %>
+            <%= number_field_tag :quantity, nil, class: "w-25 modal-input", placeholder:"Digite a quantidade" %>
+            <%= f.submit "Registrar venda Grampo Guia de Descida em Torre - (16:00 a 17:99)", class: "btn btn-enerpel w-75", data: { confirm: "Tem certeza que deseja registrar a venda de: Grampo Guia de Descida em Torre - (16:00 a 17:99)?" } %>
+          <% end %>
+
+          <%= form_for @inventory, url: sell_product_path(product_to_sell: "Grampo Guia de Descida em Pórtico - (9:00 a 11:99)"), method: :patch, html: { class: "d-flex align-items-center mb-1" } do |f| %>
+            <%= number_field_tag :quantity, nil, class: "w-25 modal-input", placeholder:"Digite a quantidade" %>
+            <%= f.submit "Registrar venda Grampo Guia de Descida em Pórtico - (9:00 a 11:99)", class: "btn btn-enerpel w-75", data: { confirm: "Tem certeza que deseja registrar a venda de: Grampo Guia de Descida em Pórtico - (9:00 a 11:99)?" } %>
+          <% end %>
+
+          <%= form_for @inventory, url: sell_product_path(product_to_sell: "Grampo Guia de Descida em Pórtico - (12:00 a 13:99)"), method: :patch, html: { class: "d-flex align-items-center mb-1" } do |f| %>
+            <%= number_field_tag :quantity, nil, class: "w-25 modal-input", placeholder:"Digite a quantidade" %>
+            <%= f.submit "Registrar venda Grampo Guia de Descida em Pórtico - (12:00 a 13:99)", class: "btn btn-enerpel w-75", data: { confirm: "Tem certeza que deseja registrar a venda de: Grampo Guia de Descida em Pórtico - (12:00 a 13:99)?" } %>
+          <% end %>
+          
+          <%= form_for @inventory, url: sell_product_path(product_to_sell: "Grampo Guia de Descida em Pórtico - (14:00 a 15:99)"), method: :patch, html: { class: "d-flex align-items-center mb-1" } do |f| %>
+            <%= number_field_tag :quantity, nil, class: "w-25 modal-input", placeholder:"Digite a quantidade" %>
+            <%= f.submit "Registrar venda Grampo Guia de Descida em Pórtico - (14:00 a 15:99)", class: "btn btn-enerpel w-75", data: { confirm: "Tem certeza que deseja registrar a venda de: Grampo Guia de Descida em Pórtico - (14:00 a 15:99)?" } %>
+          <% end %>
+          
+          <%= form_for @inventory, url: sell_product_path(product_to_sell: "Grampo Guia de Descida em Pórtico - (16:00 a 17:99)"), method: :patch, html: { class: "d-flex align-items-center mb-1" } do |f| %>
+            <%= number_field_tag :quantity, nil, class: "w-25 modal-input", placeholder:"Digite a quantidade" %>
+            <%= f.submit "Registrar venda Grampo Guia de Descida em Pórtico - (16:00 a 17:99)", class: "btn btn-enerpel w-75", data: { confirm: "Tem certeza que deseja registrar a venda de: Grampo Guia de Descida em Pórtico - (16:00 a 17:99)?" } %>
+          <% end %>
+
         </div>  
       </div>
       <div class="modal-footer">

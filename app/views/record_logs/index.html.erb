@@ -18,11 +18,14 @@
         </tr>
       </thead>
       <tbody>
+        <% count = 1 %>
       <% @record_logs.each do |record| %>
         <tr>
-          <td class="pl-4"><%= record.date %></td>
+          <td class="pl-4"><%= "#{count} - " %><%= record.date %></td>
           <td><%= record.title %></td>
         </tr>
+        <% count += 1 %>
+
       <% end %>
       </tbody>
     </table>

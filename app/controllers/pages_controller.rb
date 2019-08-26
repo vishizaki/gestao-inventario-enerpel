@@ -7,33 +7,35 @@ class PagesController < ApplicationController
 
   def home
     @inventories = Inventory.all.sort_by { |material| material.raw_material.name }
+    @inventory = Inventory.new
   end
 
-  def add_quantity
-    @inventory_material.update_quantity(1)
-    if @inventory_material.save
-      RecordLog.create(title: "Compra de 1 quantidade de #{@inventory_material.raw_material.name}", date: Time.now.strftime("%d/%m/%Y %H:%M"))
-      redirect_to root_path
-    end
-  end
+  # def add_quantity
+  #   @inventory_material.update_quantity(1)
+  #   if @inventory_material.save
+  #     RecordLog.create(title: "Compra de 1 quantidade de #{@inventory_material.raw_material.name}", date: Time.now.strftime("%d/%m/%Y %H:%M"))
+  #     redirect_to root_path
+  #   end
+  # end
 
-  def subtract_quantity
-    @inventory_material.update_quantity(-1)
-    if @inventory_material.save
-      RecordLog.create(title: "Venda de 1 quantidade de #{@inventory_material.raw_material.name}", date: Time.now.strftime("%d/%m/%Y %H:%M"))
-      redirect_to root_path
-    else
-      flash[:alert] = "Você não pode baixar o material #{@inventory_material.raw_material.name} pois não há estoque suficiente"
-      redirect_to root_path
-    end
-  end
+  # def subtract_quantity
+  #   @inventory_material.update_quantity(-1)
+  #   if @inventory_material.save
+  #     RecordLog.create(title: "Venda de 1 quantidade de #{@inventory_material.raw_material.name}", date: Time.now.strftime("%d/%m/%Y %H:%M"))
+  #     redirect_to root_path
+  #   else
+  #     flash[:alert] = "Você não pode baixar o material #{@inventory_material.raw_material.name} pois não há estoque suficiente"
+  #     redirect_to root_path
+  #   end
+  # end
 
   def sell_product
+    quantity_multiplier = params[:quantity].to_i
     final_product = FinalProduct.find_by_name(params[:product_to_sell])
-    materials_array = final_product.products
-    product_bm_hash = get_final_product_bm_hash(materials_array)
+    materials_array = final_product.products  
+    product_bm_hash = get_final_product_bm_hash(materials_array, quantity_multiplier)
     inventory_quantity_hash = get_inventory_quantity_hash(materials_array)
-    record_log = RecordLog.new(title: "Venda de 1 quantidade de #{final_product.name}", date: Time.now.strftime("%d/%m/%Y %H:%M"))
+    record_log = RecordLog.new(title: "Venda de #{quantity_multiplier} quantidade(s) de #{final_product.name}", date: Time.now.strftime("%d/%m/%Y %H:%M"))
 
     materials_array.each do |product|
       product.raw_material.inventories.each do |inventory_material|
@@ -49,10 +51,10 @@ class PagesController < ApplicationController
     @inventory_material = Inventory.find(params[:material])
   end
 
-  def get_final_product_bm_hash(final_product_array)
+  def get_final_product_bm_hash(final_product_array, quantity_multiplier)
     product_bm_hash = {}
     final_product_array.each do |material|
-      product_bm_hash[material.raw_material.name] = material.quantity
+      product_bm_hash[material.raw_material.name] = material.quantity * quantity_multiplier
     end
 
     return product_bm_hash

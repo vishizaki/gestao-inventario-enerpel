@@ -1,4 +1,10 @@
 puts "Deleting Product, Inventory, Raw Material and logs"
+# case Rails.env
+# when "development"
+#    ...
+# when "production"
+#    ...
+# end
 Product.delete_all
 Inventory.delete_all #deletar depois
 FinalProduct.delete_all

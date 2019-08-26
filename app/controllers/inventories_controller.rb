@@ -5,7 +5,11 @@ class InventoriesController < ApplicationController
   end
 
   def update
-    redirect_to root_path if @inventory.update!(inventory_params)
+    if @inventory.update!(inventory_params)
+      previous_quantity = @inventory.quantity_before_last_save
+      RecordLog.create!(title: "Alteração da quantidade de #{@inventory.raw_material.name} - #{previous_quantity} para #{@inventory.quantity} unidades", date: Time.now.strftime("%d/%m/%Y %H:%M"))
+      redirect_to root_path 
+    end
   end
 
   private
