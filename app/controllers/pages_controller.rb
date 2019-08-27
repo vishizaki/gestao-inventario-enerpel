@@ -1,33 +1,10 @@
 class PagesController < ApplicationController
-  # skip_before_action :authenticate_user!, only: [:home]
-  # before_action :authorize_admin
-  # before_action :authenticate_user!
-
   before_action :find_material, only: [:add_quantity, :subtract_quantity]
 
   def home
     @inventories = Inventory.all.sort_by { |material| material.raw_material.name }
     @inventory = Inventory.new
   end
-
-  # def add_quantity
-  #   @inventory_material.update_quantity(1)
-  #   if @inventory_material.save
-  #     RecordLog.create(title: "Compra de 1 quantidade de #{@inventory_material.raw_material.name}", date: Time.now.strftime("%d/%m/%Y %H:%M"))
-  #     redirect_to root_path
-  #   end
-  # end
-
-  # def subtract_quantity
-  #   @inventory_material.update_quantity(-1)
-  #   if @inventory_material.save
-  #     RecordLog.create(title: "Venda de 1 quantidade de #{@inventory_material.raw_material.name}", date: Time.now.strftime("%d/%m/%Y %H:%M"))
-  #     redirect_to root_path
-  #   else
-  #     flash[:alert] = "Você não pode baixar o material #{@inventory_material.raw_material.name} pois não há estoque suficiente"
-  #     redirect_to root_path
-  #   end
-  # end
 
   def sell_product
     quantity_multiplier = params[:quantity].to_i
